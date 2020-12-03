@@ -1,0 +1,14 @@
+{
+    "name": "Cortex",
+    "short_name": "Cortex",
+    "start_url": "/",
+    "description": "Hue Remote",
+    "display": "fullscreen",
+    "theme_color": "#B6DAA3",
+    "background_color": "#DADAA3",
+    "icons": [{
+        "src": "/favicon.png",
+        "sizes": "256x256",
+        "type": "image/png"
+    }]
+}
