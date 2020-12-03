@@ -36,7 +36,7 @@ function Main() {
             }
         }
     };
-    xml_http.open('GET', 'http://192.168.178.22:80/api/N9NUTdcZUk647ED4aJ6unn5UuwYN5Hk0UB00elVU/lights', true);
+    xml_http.open('GET', 'http://192.168.178.22:80/api/lights', true);
     xml_http.send(null);
     */
 }
