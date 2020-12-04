@@ -13,9 +13,22 @@
 </head>
 <body>
 <div class="control">
-    <span class="text">Living room</span></br>
-    <input type="checkbox"></br></br>
-    <input type="range" min="1" max="100" value="50">
+    <div>
+        <span class="text">Living room</span>
+        <input type="checkbox" onchange="console.log('123');">
+    </div>
+    <div>
+        <input type="range" min="1" max="100" value="50">
+    </div>
+</div>
+<div class="control">
+    <div>
+        <span class="text">Bed room</span>
+        <input type="checkbox" checked>
+    </div>
+    <div>
+        <input type="range" min="1" max="100" value="80">
+    </div>
 </div>
 </body>
 </html>
