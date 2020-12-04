@@ -1,14 +1,14 @@
-html, body, div, input {
+* {
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
     border: 0;
     margin: 0;
     padding: 0;
 }
+
 html, body {
     height: 100%;
     overscroll-behavior: none;
-}
-.hidden {
-    display: none;
 }
 
 div.control {
