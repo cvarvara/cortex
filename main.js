@@ -1,10 +1,33 @@
 'use strict';
 
 
-// -------------------------------------------------------------------------------------------------
+// Home config -------------------------------------------------------------------------------------
 
 
-function CreateControl(room_name, lights_on, brightness) {
+let rooms = {
+    'Living room': [
+        'Live Beige Lamp',
+        'Live Blue Lamp',
+        'Live Ground Lamp',
+    ],
+    'Bedroom': [
+        'Bed Lamp',
+    ],
+    'Office': [
+        'Desk Left Lamp',
+        'Desk Right Lamp',
+    ],
+    'The rest': [
+        'Bath Lamp',
+        'Hall Lamp',
+    ],
+};
+
+
+// Element factories -------------------------------------------------------------------------------
+
+
+function CreateControl(control_name, lights_on, brightness) {
     let control = document.createElement('div');
     control.classList.add('control');
 
@@ -15,7 +38,7 @@ function CreateControl(room_name, lights_on, brightness) {
 
     let text = document.createElement('span');
     text.classList.add('text');
-    text.innerHTML = room_name;
+    text.innerHTML = control_name;
     container_a.appendChild(text);
 
     let checkbox = document.createElement('input');
@@ -31,22 +54,50 @@ function CreateControl(room_name, lights_on, brightness) {
     range.disabled = !lights_on;
     container_b.appendChild(range);
 
-    console.log(room_name + ' lights ' + (lights_on ? 'on' : 'off') + ' @ ' + brightness + '%');
+    console.log(control_name + ' lights ' + (lights_on ? 'on' : 'off') + ' @ ' + brightness + '%');
     return control;
 }
 
+function CreateRoom(room_name) {
+    let room = document.createElement('div');
+    room.classList.add('room');
 
-// -------------------------------------------------------------------------------------------------
+    let text = document.createElement('span');
+    text.classList.add('text');
+    text.innerHTML = room_name;
+    room.appendChild(text);
+
+    return room;
+}
+
+
+// Page builder ------------------------------------------------------------------------------------
 
 
 function ProcessHue(response) {
     let items = JSON.parse(response);
+
+    // controls is a map from control name to HTML element for that control
+    let controls = {};
     for (let i in items) {
         let item = items[i];
         let lights_on = item.state.on;
         let brightness = Math.round(item.state.bri / 254 * 100);
         let control = CreateControl(item.name, lights_on, brightness);
-        document.body.appendChild(control);
+        controls[item.name] = control;
+    }
+
+    // rooms is a map from room name to list of control names in that room
+    for (let room_name in rooms) {
+        let room = CreateRoom(room_name);
+
+        let controls_in_room = rooms[room_name];
+        for (let i in controls_in_room) {
+            let control = controls[controls_in_room[i]];
+            room.appendChild(control);
+        }
+
+        document.body.appendChild(room);
     }
 }
 
