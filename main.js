@@ -37,7 +37,9 @@ function CreateControl(room_name, lights_on, brightness) {
 
 
 // -------------------------------------------------------------------------------------------------
-
+function GetMainContainer() {
+    return document.getElementsByClassName('main_container')[0];
+}
 
 function ProcessHue(response) {
     let items = JSON.parse(response);
@@ -46,7 +48,7 @@ function ProcessHue(response) {
         let lights_on = item.state.on;
         let brightness = Math.round(item.state.bri / 254 * 100);
         let control = CreateControl(item.name, lights_on, brightness);
-        document.body.appendChild(control);
+        GetMainContainer().appendChild(control);
     }
 }
 
