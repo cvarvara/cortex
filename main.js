@@ -91,9 +91,6 @@ function CreateControl(light_id, group_id, room_name, lights_on, intensity) {
 }
 
 
-// -------------------------------------------------------------------------------------------------
-
-
 function ProcessHue(response) {
     let house_lights = 0;
     let house_lights_on = false;
@@ -103,9 +100,14 @@ function ProcessHue(response) {
     for (let item_id in items) {
         let item = items[item_id];
         let lights_on = item.state.on;
+
+        let brightness = Math.round(item.state.bri / 254 * 100);
+        let control = CreateControl(item.name, lights_on, brightness);
+        GetMainContainer().appendChild(control);
+
         let intensity = GetIntensity(item.state.bri, item.state.ct);
         let control = CreateControl(item_id, null, item.name, lights_on, intensity);
-        document.body.appendChild(control);
+        document.getElementsByClassName('main_container')[0].appendChild(control);
 
         ++house_lights;
         house_lights_on = house_lights_on || lights_on;
@@ -113,7 +115,7 @@ function ProcessHue(response) {
     }
 
     let control = CreateControl(null, 0, 'House', house_lights_on, Math.round(house_intensity / house_lights));
-    document.body.prepend(control);
+    document.getElementsByClassName('main_container')[0].prepend(control);
 }
 
 
