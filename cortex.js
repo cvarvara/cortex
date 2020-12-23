@@ -129,8 +129,7 @@ function ProcessLights(raw_lights) {
     for (let id in raw_lights) {
         let raw_light = raw_lights[id];
         if ('error' in raw_light) {
-            console.log('Error processing Hue lights response', raw_light.error);
-            continue;
+            throw new Error('Error processing Hue lights response', raw_light.error);
         }
 
         g_lights[id] = {
@@ -153,8 +152,7 @@ function ProcessGroups(raw_groups) {
     for (let id in raw_groups) {
         let raw_group = raw_groups[id];
         if ('error' in raw_group) {
-            console.log('Error processing Hue group response', raw_group.error);
-            continue;
+            throw new Error('Error processing Hue group response', raw_group.error);
         }
 
         g_groups[id] = {
