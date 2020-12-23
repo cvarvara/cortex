@@ -160,7 +160,7 @@ function ProcessGroups(raw_groups) {
         g_groups[id] = {
             'name': raw_group.name,
             'lights': raw_group.lights,
-            'on': raw_group.action.on,
+            'on': raw_group.state.any_on,
             'intensity': GetIntensity(raw_group.action.bri, raw_group.action.ct),
         }
     }
