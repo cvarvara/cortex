@@ -62,6 +62,13 @@ function LoadScripts(script_urls, on_loaded) {
 
 function Main() {
     Debug.Log(1, 'Main running');
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/worker.js');
+        });
+    }
+
     let scripts = [
         '/utils.js',
         '/cortex.js',
