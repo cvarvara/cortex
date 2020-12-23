@@ -63,7 +63,6 @@ function LoadScripts(script_urls, on_loaded) {
 function Main() {
     Debug.Log(1, 'Main running');
     let scripts = [
-        '/main.js',
         '/utils.js',
         '/cortex.js',
     ];
